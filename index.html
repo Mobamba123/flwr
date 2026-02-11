@@ -1,243 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To Summer ❤️</title>
-    <style>
-        :root {
-            --bg-color: #05070a;
-            --card-white: #ffffff;
-            --text-color: #333;
-            --accent-red: #e63946;
-        }
+<meta charset="UTF-8">
+<title>For Summer ❤️</title>
 
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            overflow: hidden;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-        }
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: black;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-        /* Black Starry Background */
-        .stars-container {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
-            z-index: -1;
-        }
+  background-image:
+    radial-gradient(2px 2px at 20% 30%, white, transparent),
+    radial-gradient(1.5px 1.5px at 70% 80%, white, transparent),
+    radial-gradient(1.5px 1.5px at 40% 60%, white, transparent),
+    radial-gradient(2px 2px at 80% 20%, white, transparent),
+    radial-gradient(1px 1px at 10% 90%, white, transparent),
+    radial-gradient(2px 2px at 50% 50%, white, transparent),
+    radial-gradient(1.5px 1.5px at 60% 10%, white, transparent),
+    radial-gradient(2px 2px at 90% 70%, white, transparent);
+  background-size: 600px 600px;
+}
 
-        .star {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            opacity: 0.5;
-            animation: twinkle var(--duration) infinite ease-in-out;
-        }
+/* CARD */
+.card-wrapper { perspective: 1200px; }
 
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.2); }
-        }
+.card {
+  width: 350px;
+  height: 450px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 1s ease;
+}
 
-        /* Card Container */
-        .perspective-container {
-            perspective: 1500px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+.card.open { transform: rotateY(180deg); }
 
-        .card {
-            width: 320px;
-            height: 450px;
-            background: var(--card-white);
-            border-radius: 20px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-            cursor: pointer;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
+.card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  box-sizing: border-box;
+}
 
-        .card.open {
-            transform: rotateY(-10deg) scale(1.1);
-            cursor: default;
-        }
+.card-back { transform: rotateY(180deg); }
 
-        /* Front Side */
-        .card-front {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 2;
-            transition: opacity 0.5s ease;
-        }
+/* BUTTONS */
+.buttons { margin-top: 20px; }
 
-        .card.open .card-front {
-            opacity: 0;
-            pointer-events: none;
-        }
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 20px;
+  margin: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
 
-        .card-front h1 {
-            color: var(--text-color);
-            font-weight: 300;
-            font-size: 2rem;
-        }
+#yesBtn { background: #ff4d6d; color: white; }
+#noBtn { background: #ccc; }
 
-        /* Inside Content */
-        .card-inside {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.8s ease 0.3s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+/* FLOWER */
+.petal {
+  transform-origin: 100px 100px;
+  transform: scale(0);
+  opacity: 0;
+}
 
-        .card.open .card-inside {
-            opacity: 1;
-            transform: translateY(0);
-        }
+.bloom {
+  animation: bloomAnim 0.6s forwards;
+}
 
-        /* The Flower */
-        .flower {
-            position: relative;
-            width: 60px;
-            height: 60px;
-            margin-bottom: 20px;
-        }
+@keyframes bloomAnim {
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
 
-        .petal {
-            position: absolute;
-            width: 30px;
-            height: 30px;
-            background: var(--accent-red);
-            border-radius: 30px 0;
-            opacity: 0;
-            transform-origin: bottom right;
-        }
+.message {
+  margin-top: 20px;
+  font-size: 22px;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 1.5s ease;
+}
 
-        .card.open .petal {
-            animation: bloom 1.5s forwards ease-out 0.8s;
-        }
+.message.show {
+  opacity: 1;
+}
 
-        @keyframes bloom {
-            to { opacity: 0.8; }
-        }
-
-        /* Rotating Earth */
-        .earth {
-            width: 100px;
-            height: 100px;
-            background: radial-gradient(circle at 30% 30%, #4facfe 0%, #00f2fe 100%);
-            border-radius: 50%;
-            box-shadow: inset -10px -10px 20px rgba(0,0,0,0.2), 0 0 15px rgba(79, 172, 254, 0.5);
-            position: relative;
-            overflow: hidden;
-            margin: 20px 0;
-            animation: rotateEarth 10s linear infinite;
-        }
-
-        .earth::before {
-            content: '';
-            position: absolute;
-            width: 200%;
-            height: 100%;
-            background: repeating-linear-gradient(90deg, transparent, transparent 20px, #2ecc71 20px, #2ecc71 40px);
-            opacity: 0.4;
-            filter: blur(5px);
-        }
-
-        @keyframes rotateEarth {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .message {
-            color: var(--text-color);
-            font-size: 1.2rem;
-            margin-top: 20px;
-            padding: 0 20px;
-        }
-
-        .heart {
-            color: var(--accent-red);
-            display: inline-block;
-            animation: heartbeat 1.5s infinite;
-        }
-
-        @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-        }
-
-    </style>
+</style>
 </head>
 <body>
 
-    <div class="stars-container" id="stars"></div>
+<div class="card-wrapper">
+  <div class="card" id="card">
 
-    <div class="perspective-container">
-        <div class="card" id="card" onclick="openCard()">
-            <div class="card-front">
-                <h1>To Summer <span class="heart">❤️</span></h1>
-                <p style="color: #888; font-size: 0.8rem;">(Click to open)</p>
-            </div>
-
-            <div class="card-inside">
-                <div class="flower">
-                    <div class="petal" style="transform: rotate(0deg);"></div>
-                    <div class="petal" style="transform: rotate(72deg);"></div>
-                    <div class="petal" style="transform: rotate(144deg);"></div>
-                    <div class="petal" style="transform: rotate(216deg);"></div>
-                    <div class="petal" style="transform: rotate(288deg);"></div>
-                </div>
-
-                <div class="earth"></div>
-
-                <div class="message">
-                    Happy Valentine’s Day <br>
-                    <span style="font-weight: bold;">I love you</span> <span class="heart">❤️</span>
-                </div>
-            </div>
-        </div>
+    <!-- FRONT -->
+    <div class="card-face card-front">
+      <h2>Will you be my Valentine? ❤️</h2>
+      <div class="buttons">
+        <button id="yesBtn">Yes</button>
+        <button id="noBtn">No</button>
+      </div>
     </div>
 
-    <script>
-        // Generate Stars
-        const starsContainer = document.getElementById('stars');
-        const starCount = 150;
+    <!-- BACK -->
+    <div class="card-face card-back">
 
-        for (let i = 0; i < starCount; i++) {
-            const star = document.createElement('div');
-            star.className = 'star';
-            const size = Math.random() * 3 + 'px';
-            star.style.width = size;
-            star.style.height = size;
-            star.style.top = Math.random() * 100 + '%';
-            star.style.left = Math.random() * 100 + '%';
-            star.style.setProperty('--duration', Math.random() * 3 + 2 + 's');
-            starsContainer.appendChild(star);
-        }
+      <img src="https://i.imgur.com/ORYNoHC.jpeg" width="150" alt="Kangaroo">
 
-        function openCard() {
-            document.getElementById('card').classList.add('open');
-        }
-    </script>
+      <svg viewBox="0 0 200 200" width="150" height="150">
+        <ellipse class="petal" cx="100" cy="40" rx="25" ry="50" fill="#ff4d6d"/>
+        <ellipse class="petal" cx="160" cy="100" rx="25" ry="50" fill="#ff4d6d"/>
+        <ellipse class="petal" cx="100" cy="160" rx="25" ry="50" fill="#ff4d6d"/>
+        <ellipse class="petal" cx="40" cy="100" rx="25" ry="50" fill="#ff4d6d"/>
+        <ellipse class="petal" cx="140" cy="60" rx="25" ry="50" fill="#ff4d6d"/>
+        <ellipse class="petal" cx="140" cy="140" rx="25" ry="50" fill="#ff4d6d"/>
+        <ellipse class="petal" cx="60" cy="140" rx="25" ry="50" fill="#ff4d6d"/>
+        <ellipse class="petal" cx="60" cy="60" rx="25" ry="50" fill="#ff4d6d"/>
+        <circle cx="100" cy="100" r="30" fill="gold"/>
+      </svg>
+
+      <div class="message" id="finalMessage">
+        Happy Valentine’s Day ❤️<br>
+        I love you
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+const card = document.getElementById("card");
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const petals = document.querySelectorAll(".petal");
+const message = document.getElementById("finalMessage");
+
+let noScale = 1;
+
+noBtn.addEventListener("click", () => {
+  noScale -= 0.2;
+  if(noScale > 0){
+    noBtn.style.transform = `scale(${noScale})`;
+  }
+});
+
+yesBtn.addEventListener("click", () => {
+  card.classList.add("open");
+
+  // Start bloom AFTER card flips
+  setTimeout(() => {
+    petals.forEach((petal, index) => {
+      setTimeout(() => {
+        petal.classList.add("bloom");
+      }, index * 200);
+    });
+
+    setTimeout(() => {
+      message.classList.add("show");
+    }, petals.length * 200 + 500);
+
+  }, 1000);
+});
+</script>
+
 </body>
 </html>
