@@ -1,1 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine Card</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    background: black;
+    overflow: hidden;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Star background */
+.stars {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+}
+
+.stars::after {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    box-shadow:
+        50px 100px white, 200px 300px white, 400px 150px white,
+        600px 250px white, 800px 400px white, 1000px 200px white,
+        1200px 500px white, 300px 600px white, 700px 700px white;
+    animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+/* Card */
+.card-container {
+    perspective: 1000px;
+}
+
+.card {
+    width: 350px;
+    height: 250px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 1s;
+}
+
+.card.open {
+    transform: rotateY(180deg);
+}
+
+.card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 15px;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+}
+
+.card-back {
+    transform: rotateY(180deg);
+    background: #ffe6f0;
+}
+
+/* Buttons */
+button {
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#yesBtn {
+    background-color: #ff4d6d;
+    color: white;
+}
+
+#noBtn {
+    background-color: #999;
+    color: white;
+}
+
+/* Flowers */
+.flower {
+    width: 40px;
+    height: 40px;
+    background: pink;
+    border-radius: 50%;
+    position: absolute;
+    transform: scale(0);
+    animation: bloom 1s forwards;
+}
+
+@keyframes bloom {
+    to { transform: scale(1); }
+}
+
+/* Image placeholders */
+.kangaroo, .cat {
+    width: 80px;
+    margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="stars"></div>
+
+<div class="card-container">
+    <div class="card" id="card">
+        
+        <!-- Front -->
+        <div class="card-face">
+            <h2>Will you be my Valentine?</h2>
+            <div>
+                <button id="yesBtn">Yes ❤️</button>
+                <button id="noBtn">No 😢</button>
+            </div>
+        </div>
+
+        <!-- Back -->
+        <div class="card-face card-back" id="backFace">
+            <h2>Happy Valentine's Day ❤️</h2>
+            <p>I love you</p>
+
+            <!-- Flowers -->
+            <div class="flower" style="top:20px; left:30px;"></div>
+            <div class="flower" style="top:50px; right:40px;"></div>
+            <div class="flower" style="bottom:30px; left:80px;"></div>
+
+            <!-- Kangaroo placeholder -->
+            <img src="https://via.placeholder.com/80?text=Kangaroo" 
+                 class="kangaroo" alt="Kangaroo">
+
+            <!-- Cat placeholder -->
+            <img src="https://via.placeholder.com/80?text=Rosey" 
+                 class="cat" alt="Rosey">
+
+        </div>
+    </div>
+</div>
+
+<script>
+let noBtn = document.getElementById("noBtn");
+let yesBtn = document.getElementById("yesBtn");
+let card = document.getElementById("card");
+
+let noScale = 1;
+
+noBtn.addEventListener("click", function() {
+    noScale -= 0.1;
+    if (noScale > 0.1) {
+        noBtn.style.transform = `scale(${noScale})`;
+    } else {
+        noBtn.style.display = "none";
+    }
+});
+
+yesBtn.addEventListener("click", function() {
+    card.classList.add("open");
+});
+</script>
+
+</body>
+</html>
 
