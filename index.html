@@ -2,294 +2,165 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Valentine Galaxy Card</title>
+<title>Happy Valentine’s Day ❤️</title>
 
 <style>
-* { box-sizing: border-box; }
-
 body {
-    margin: 0;
-    height: 100vh;
-    background: black;
-    overflow: hidden;
-    font-family: 'Segoe UI', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    perspective: 1500px;
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  background: black;
+
+  /* Stars */
+  background-image:
+    radial-gradient(2px 2px at 20% 30%, white, transparent),
+    radial-gradient(1.5px 1.5px at 70% 80%, white, transparent),
+    radial-gradient(1.5px 1.5px at 40% 60%, white, transparent),
+    radial-gradient(2px 2px at 80% 20%, white, transparent),
+    radial-gradient(1px 1px at 10% 90%, white, transparent),
+    radial-gradient(2px 2px at 50% 50%, white, transparent),
+    radial-gradient(1.5px 1.5px at 60% 10%, white, transparent),
+    radial-gradient(2px 2px at 90% 70%, white, transparent);
+  background-size: 600px 600px;
 }
 
-/* ===== GALAXY ===== */
-.stars, .stars2, .stars3 {
-    position: fixed;
-    width: 200%;
-    height: 200%;
-    background-repeat: repeat;
-    animation: moveStars linear infinite;
+/* GLOBE */
+#globe {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle at 30% 30%, #2e8b57 20%, #3cb371 70%);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
 }
 
-.stars {
-    background-image:
-      radial-gradient(2px 2px at 20px 30px, white, transparent),
-      radial-gradient(2px 2px at 200px 150px, white, transparent),
-      radial-gradient(1px 1px at 400px 250px, white, transparent);
-    animation-duration: 60s;
+/* PLANE */
+.plane {
+  position: absolute;
+  width: 60px;
+  height: 30px;
+  background: #ff0000;
+  clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+  top: 80%;
+  left: -60px;
+  animation: fly 5s linear forwards;
+  z-index: 2;
 }
 
-.stars2 {
-    background-image:
-      radial-gradient(2px 2px at 100px 200px, #aaa, transparent),
-      radial-gradient(1px 1px at 300px 400px, #ccc, transparent);
-    animation-duration: 100s;
-    opacity: 0.6;
+@keyframes fly {
+  0% { left: -60px; top: 80%; transform: rotate(0deg);}
+  50% { left: 50%; top: 20%; transform: rotate(20deg);}
+  100% { left: 60%; top: 60%; transform: rotate(-10deg);}
 }
 
-.stars3 {
-    background-image:
-      radial-gradient(1px 1px at 150px 100px, #fff, transparent),
-      radial-gradient(2px 2px at 500px 500px, #ddd, transparent);
-    animation-duration: 140s;
-    opacity: 0.4;
+/* KANGAROO */
+#kangaroo {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  opacity: 0;
+  transition: opacity 1s;
+  z-index: 3;
 }
 
-@keyframes moveStars {
-    from { transform: translateY(0); }
-    to { transform: translateY(-1000px); }
+/* FLOWER CONTAINER */
+#flowerContainer {
+  position: absolute;
+  bottom: 30px;
+  left: 60%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 120px;
+  opacity: 0;
+  transition: opacity 1s;
+  z-index: 3;
 }
 
-/* ===== CARD ===== */
-.card-container {
-    width: 420px;
-    height: 300px;
-    position: relative;
-}
-
-.card {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    transform-style: preserve-3d;
-    transition: transform 1.2s ease;
-}
-
-.card.open {
-    transform: rotateY(180deg);
-}
-
-.card-face {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 20px;
-    backface-visibility: hidden;
-    background: white;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    text-align: center;
-}
-
-.card-back {
-    transform: rotateY(180deg);
-    background: linear-gradient(to bottom, #ffe6f0, #ffd6ec);
-    overflow: hidden;
-    position: relative;
-}
-
-/* Buttons */
-button {
-    margin: 10px;
-    padding: 10px 25px;
-    border: none;
-    border-radius: 30px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-#yesBtn {
-    background: #ff4d6d;
-    color: white;
-}
-
-#noBtn {
-    background: #999;
-    color: white;
-    position: absolute;
-    transition: left 0.2s ease, top 0.2s ease;
-}
-
-/* Flowers */
-.flower-container {
-    position: absolute;
-    bottom: 0;
-    display: flex;
-    gap: 40px;
-}
-
-.stem {
-    width: 4px;
-    height: 0;
-    background: green;
-    animation: growStem 1.5s forwards;
-}
-
-@keyframes growStem {
-    to { height: 80px; }
-}
-
+/* BLOOM ANIMATION */
 .petal {
-    width: 20px;
-    height: 20px;
-    background: pink;
-    border-radius: 50%;
-    position: absolute;
-    transform: scale(0);
-    animation: bloom 0.8s forwards;
-    animation-delay: 1.5s;
+  transform-origin: 50% 50%;
+  transform: scale(0);
+  animation: bloom 0.6s forwards;
 }
+
+.petal:nth-child(1) { animation-delay: 0.2s; }
+.petal:nth-child(2) { animation-delay: 0.4s; }
+.petal:nth-child(3) { animation-delay: 0.6s; }
+.petal:nth-child(4) { animation-delay: 0.8s; }
+.petal:nth-child(5) { animation-delay: 1s; }
+.petal:nth-child(6) { animation-delay: 1.2s; }
+.petal:nth-child(7) { animation-delay: 1.4s; }
+.petal:nth-child(8) { animation-delay: 1.6s; }
 
 @keyframes bloom {
-    to { transform: scale(1); }
+  to {
+    transform: scale(1);
+  }
 }
 
-/* Confetti */
-.confetti {
-    position: fixed;
-    width: 10px;
-    height: 10px;
-    animation: fall linear forwards;
+/* MESSAGE */
+#message {
+  position: absolute;
+  top: 20%;
+  width: 100%;
+  text-align: center;
+  font-size: 36px;
+  color: #ff1493;
+  opacity: 0;
+  transition: opacity 2s;
 }
 
-@keyframes fall {
-    to {
-        transform: translateY(100vh) rotate(720deg);
-        opacity: 0;
-    }
-}
-
-.kangaroo, .cat {
-    width: 80px;
-    margin-top: 10px;
-}
 </style>
 </head>
 
 <body>
 
-<div class="stars"></div>
-<div class="stars2"></div>
-<div class="stars3"></div>
+<div id="globe"></div>
+<div class="plane"></div>
 
-<div class="card-container" id="container">
-<div class="card" id="card">
+<img id="kangaroo" src="https://i.imgur.com/ORYNoHC.jpeg" alt="Kangaroo">
 
-<!-- FRONT -->
-<div class="card-face" id="front">
-    <h2>Will you be my Valentine?</h2>
-    <button id="yesBtn">Yes ❤️</button>
-    <button id="noBtn">No 😢</button>
+<!-- REAL SVG FLOWER -->
+<div id="flowerContainer">
+<svg viewBox="0 0 200 200" width="120" height="120">
+  <!-- Petals -->
+  <ellipse class="petal" cx="100" cy="50" rx="25" ry="45" fill="#ff4d6d"/>
+  <ellipse class="petal" cx="150" cy="100" rx="25" ry="45" fill="#ff4d6d" transform="rotate(90 150 100)"/>
+  <ellipse class="petal" cx="100" cy="150" rx="25" ry="45" fill="#ff4d6d"/>
+  <ellipse class="petal" cx="50" cy="100" rx="25" ry="45" fill="#ff4d6d" transform="rotate(90 50 100)"/>
+  <ellipse class="petal" cx="135" cy="65" rx="25" ry="45" fill="#ff4d6d" transform="rotate(45 135 65)"/>
+  <ellipse class="petal" cx="135" cy="135" rx="25" ry="45" fill="#ff4d6d" transform="rotate(135 135 135)"/>
+  <ellipse class="petal" cx="65" cy="135" rx="25" ry="45" fill="#ff4d6d" transform="rotate(45 65 135)"/>
+  <ellipse class="petal" cx="65" cy="65" rx="25" ry="45" fill="#ff4d6d" transform="rotate(135 65 65)"/>
+
+  <!-- Perfect Center -->
+  <circle cx="100" cy="100" r="30" fill="gold"/>
+</svg>
 </div>
 
-<!-- BACK -->
-<div class="card-face card-back">
-    <h2>Happy Valentine's Day ❤️</h2>
-    <p>I love you</p>
-
-    <div class="flower-container" id="flowers"></div>
-
-    <img src="https://via.placeholder.com/80?text=Kangaroo" class="kangaroo">
-    <img src="https://via.placeholder.com/80?text=Rosey" class="cat">
-</div>
-
-</div>
-</div>
+<div id="message">Happy Valentine’s Day ❤️</div>
 
 <script>
-let card = document.getElementById("card");
-let yesBtn = document.getElementById("yesBtn");
-let noBtn = document.getElementById("noBtn");
-let container = document.getElementById("front");
-let flowersContainer = document.getElementById("flowers");
+const plane = document.querySelector('.plane');
+const kangaroo = document.getElementById('kangaroo');
+const flower = document.getElementById('flowerContainer');
+const message = document.getElementById('message');
 
-/* ===== NO BUTTON RUN AWAY ===== */
-container.addEventListener("mousemove", (e) => {
-    const rect = noBtn.getBoundingClientRect();
-    const dx = e.clientX - (rect.left + rect.width/2);
-    const dy = e.clientY - (rect.top + rect.height/2);
-    const distance = Math.sqrt(dx*dx + dy*dy);
+plane.addEventListener('animationend', () => {
+  plane.style.display = 'none';
+  kangaroo.style.opacity = 1;
+  flower.style.opacity = 1;
 
-    if (distance < 100) {
-        moveNoButton();
-    }
+  setTimeout(() => {
+    message.style.opacity = 1;
+  }, 2000);
 });
-
-noBtn.addEventListener("click", moveNoButton);
-
-function moveNoButton() {
-    const containerRect = container.getBoundingClientRect();
-    const maxX = containerRect.width - noBtn.offsetWidth;
-    const maxY = containerRect.height - noBtn.offsetHeight;
-
-    const randomX = Math.random() * maxX;
-    const randomY = Math.random() * maxY;
-
-    noBtn.style.left = randomX + "px";
-    noBtn.style.top = randomY + "px";
-}
-
-/* ===== YES CLICK ===== */
-yesBtn.addEventListener("click", () => {
-    card.classList.add("open");
-    launchConfetti();
-    growFlowers();
-});
-
-/* CONFETTI */
-function launchConfetti() {
-    for (let i = 0; i < 100; i++) {
-        let conf = document.createElement("div");
-        conf.classList.add("confetti");
-        conf.style.left = Math.random() * 100 + "vw";
-        conf.style.top = "-10px";
-        conf.style.backgroundColor =
-          ["#ff4d6d","#ffcc00","#00ccff","#66ff66","#ff66ff"][Math.floor(Math.random()*5)];
-        conf.style.animationDuration = (Math.random()*2 + 2) + "s";
-        document.body.appendChild(conf);
-
-        setTimeout(() => conf.remove(), 4000);
-    }
-}
-
-/* FLOWERS */
-function growFlowers() {
-    for (let i = 0; i < 3; i++) {
-        let flower = document.createElement("div");
-        flower.style.position = "relative";
-
-        let stem = document.createElement("div");
-        stem.classList.add("stem");
-
-        let bloom = document.createElement("div");
-        bloom.style.position = "relative";
-        bloom.style.top = "-10px";
-
-        for (let p = 0; p < 6; p++) {
-            let petal = document.createElement("div");
-            petal.classList.add("petal");
-            petal.style.left = Math.cos(p * 60 * Math.PI/180) * 15 + "px";
-            petal.style.top = Math.sin(p * 60 * Math.PI/180) * 15 + "px";
-            bloom.appendChild(petal);
-        }
-
-        flower.appendChild(stem);
-        flower.appendChild(bloom);
-        flowersContainer.appendChild(flower);
-    }
-}
 </script>
 
 </body>
