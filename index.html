@@ -1,120 +1,105 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2575.7">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-  </style>
+<meta charset="UTF-8">
+<title>For You ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to top, #ffdde1, #ee9ca7);
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+}
+
+.container {
+  text-align: center;
+}
+
+.flower {
+  position: relative;
+  width: 150px;
+  height: 150px;
+}
+
+.petal {
+  position: absolute;
+  width: 70px;
+  height: 100px;
+  background: #ff4d6d;
+  border-radius: 50%;
+  transform-origin: bottom center;
+  opacity: 0;
+  animation: bloom 2s forwards;
+}
+
+.petal:nth-child(1) { transform: rotate(0deg); animation-delay: 0.5s; }
+.petal:nth-child(2) { transform: rotate(45deg); animation-delay: 0.8s; }
+.petal:nth-child(3) { transform: rotate(90deg); animation-delay: 1.1s; }
+.petal:nth-child(4) { transform: rotate(135deg); animation-delay: 1.4s; }
+.petal:nth-child(5) { transform: rotate(180deg); animation-delay: 1.7s; }
+.petal:nth-child(6) { transform: rotate(225deg); animation-delay: 2s; }
+.petal:nth-child(7) { transform: rotate(270deg); animation-delay: 2.3s; }
+.petal:nth-child(8) { transform: rotate(315deg); animation-delay: 2.6s; }
+
+@keyframes bloom {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.center {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  width: 70px;
+  height: 70px;
+  background: #ffd60a;
+  border-radius: 50%;
+}
+
+.message {
+  margin-top: 30px;
+  font-size: 24px;
+  color: white;
+  opacity: 0;
+  animation: fadeIn 3s forwards;
+  animation-delay: 3s;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+</style>
 </head>
+
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1">&lt;meta charset="UTF-8"&gt;</p>
-<p class="p1">&lt;title&gt;For You ❤️&lt;/title&gt;</p>
-<p class="p1">&lt;style&gt;</p>
-<p class="p1">body {</p>
-<p class="p1"><span class="Apple-converted-space">  </span>margin: 0;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>height: 100vh;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>justify-content: center;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>background: linear-gradient(to top, #ffdde1, #ee9ca7);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>font-family: Arial, sans-serif;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>overflow: hidden;</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">.container {</p>
-<p class="p1"><span class="Apple-converted-space">  </span>text-align: center;</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">.flower {</p>
-<p class="p1"><span class="Apple-converted-space">  </span>position: relative;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>width: 150px;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>height: 150px;</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">.petal {</p>
-<p class="p1"><span class="Apple-converted-space">  </span>position: absolute;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>width: 70px;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>height: 100px;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>background: #ff4d6d;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>border-radius: 50%;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>transform-origin: bottom center;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>opacity: 0;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>animation: bloom 2s forwards;</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">.petal:nth-child(1) { transform: rotate(0deg); animation-delay: 0.5s; }</p>
-<p class="p1">.petal:nth-child(2) { transform: rotate(45deg); animation-delay: 0.8s; }</p>
-<p class="p1">.petal:nth-child(3) { transform: rotate(90deg); animation-delay: 1.1s; }</p>
-<p class="p1">.petal:nth-child(4) { transform: rotate(135deg); animation-delay: 1.4s; }</p>
-<p class="p1">.petal:nth-child(5) { transform: rotate(180deg); animation-delay: 1.7s; }</p>
-<p class="p1">.petal:nth-child(6) { transform: rotate(225deg); animation-delay: 2s; }</p>
-<p class="p1">.petal:nth-child(7) { transform: rotate(270deg); animation-delay: 2.3s; }</p>
-<p class="p1">.petal:nth-child(8) { transform: rotate(315deg); animation-delay: 2.6s; }</p>
-<p class="p2"><br></p>
-<p class="p1">@keyframes bloom {</p>
-<p class="p1"><span class="Apple-converted-space">  </span>from {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>transform: scale(0) rotate(var(--rotate));</p>
-<p class="p1"><span class="Apple-converted-space">    </span>opacity: 0;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>to {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>transform: scale(1) rotate(var(--rotate));</p>
-<p class="p1"><span class="Apple-converted-space">    </span>opacity: 1;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">.center {</p>
-<p class="p1"><span class="Apple-converted-space">  </span>position: absolute;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>top: 40px;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>left: 40px;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>width: 70px;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>height: 70px;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>background: #ffd60a;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>border-radius: 50%;</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">.message {</p>
-<p class="p1"><span class="Apple-converted-space">  </span>margin-top: 30px;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>font-size: 24px;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>color: white;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>opacity: 0;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>animation: fadeIn 3s forwards;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>animation-delay: 3s;</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">@keyframes fadeIn {</p>
-<p class="p1"><span class="Apple-converted-space">  </span>to { opacity: 1; }</p>
-<p class="p1">}</p>
-<p class="p1">&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p1">&lt;div class="container"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="flower"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="petal" style="--rotate:0deg;"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="petal" style="--rotate:45deg;"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="petal" style="--rotate:90deg;"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="petal" style="--rotate:135deg;"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="petal" style="--rotate:180deg;"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="petal" style="--rotate:225deg;"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="petal" style="--rotate:270deg;"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="petal" style="--rotate:315deg;"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="center"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="message"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>For you, Summer 🌸&lt;br&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>Xoxo</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+<div class="container">
+  <div class="flower">
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="center"></div>
+  </div>
+
+  <div class="message">
+    For you, Summer 🌸<br>
+    Xoxo
+  </div>
+</div>
 </body>
 </html>
