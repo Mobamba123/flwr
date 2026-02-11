@@ -1,167 +1,243 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Happy Valentine’s Day ❤️</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Summer ❤️</title>
+    <style>
+        :root {
+            --bg-color: #05070a;
+            --card-white: #ffffff;
+            --text-color: #333;
+            --accent-red: #e63946;
+        }
 
-<style>
-body {
-  margin: 0;
-  height: 100vh;
-  overflow: hidden;
-  font-family: Arial, sans-serif;
-  background: black;
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+        }
 
-  /* Stars */
-  background-image:
-    radial-gradient(2px 2px at 20% 30%, white, transparent),
-    radial-gradient(1.5px 1.5px at 70% 80%, white, transparent),
-    radial-gradient(1.5px 1.5px at 40% 60%, white, transparent),
-    radial-gradient(2px 2px at 80% 20%, white, transparent),
-    radial-gradient(1px 1px at 10% 90%, white, transparent),
-    radial-gradient(2px 2px at 50% 50%, white, transparent),
-    radial-gradient(1.5px 1.5px at 60% 10%, white, transparent),
-    radial-gradient(2px 2px at 90% 70%, white, transparent);
-  background-size: 600px 600px;
-}
+        /* Black Starry Background */
+        .stars-container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+            z-index: -1;
+        }
 
-/* GLOBE */
-#globe {
-  position: absolute;
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle at 30% 30%, #2e8b57 20%, #3cb371 70%);
-  border-radius: 50%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1;
-}
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: twinkle var(--duration) infinite ease-in-out;
+        }
 
-/* PLANE */
-.plane {
-  position: absolute;
-  width: 60px;
-  height: 30px;
-  background: #ff0000;
-  clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
-  top: 80%;
-  left: -60px;
-  animation: fly 5s linear forwards;
-  z-index: 2;
-}
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
 
-@keyframes fly {
-  0% { left: -60px; top: 80%; transform: rotate(0deg);}
-  50% { left: 50%; top: 20%; transform: rotate(20deg);}
-  100% { left: 60%; top: 60%; transform: rotate(-10deg);}
-}
+        /* Card Container */
+        .perspective-container {
+            perspective: 1500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
 
-/* KANGAROO */
-#kangaroo {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 150px;
-  opacity: 0;
-  transition: opacity 1s;
-  z-index: 3;
-}
+        .card {
+            width: 320px;
+            height: 450px;
+            background: var(--card-white);
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
 
-/* FLOWER CONTAINER */
-#flowerContainer {
-  position: absolute;
-  bottom: 30px;
-  left: 60%;
-  transform: translateX(-50%);
-  width: 120px;
-  height: 120px;
-  opacity: 0;
-  transition: opacity 1s;
-  z-index: 3;
-}
+        .card.open {
+            transform: rotateY(-10deg) scale(1.1);
+            cursor: default;
+        }
 
-/* BLOOM ANIMATION */
-.petal {
-  transform-origin: 50% 50%;
-  transform: scale(0);
-  animation: bloom 0.6s forwards;
-}
+        /* Front Side */
+        .card-front {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+            transition: opacity 0.5s ease;
+        }
 
-.petal:nth-child(1) { animation-delay: 0.2s; }
-.petal:nth-child(2) { animation-delay: 0.4s; }
-.petal:nth-child(3) { animation-delay: 0.6s; }
-.petal:nth-child(4) { animation-delay: 0.8s; }
-.petal:nth-child(5) { animation-delay: 1s; }
-.petal:nth-child(6) { animation-delay: 1.2s; }
-.petal:nth-child(7) { animation-delay: 1.4s; }
-.petal:nth-child(8) { animation-delay: 1.6s; }
+        .card.open .card-front {
+            opacity: 0;
+            pointer-events: none;
+        }
 
-@keyframes bloom {
-  to {
-    transform: scale(1);
-  }
-}
+        .card-front h1 {
+            color: var(--text-color);
+            font-weight: 300;
+            font-size: 2rem;
+        }
 
-/* MESSAGE */
-#message {
-  position: absolute;
-  top: 20%;
-  width: 100%;
-  text-align: center;
-  font-size: 36px;
-  color: #ff1493;
-  opacity: 0;
-  transition: opacity 2s;
-}
+        /* Inside Content */
+        .card-inside {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-</style>
+        .card.open .card-inside {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* The Flower */
+        .flower {
+            position: relative;
+            width: 60px;
+            height: 60px;
+            margin-bottom: 20px;
+        }
+
+        .petal {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: var(--accent-red);
+            border-radius: 30px 0;
+            opacity: 0;
+            transform-origin: bottom right;
+        }
+
+        .card.open .petal {
+            animation: bloom 1.5s forwards ease-out 0.8s;
+        }
+
+        @keyframes bloom {
+            to { opacity: 0.8; }
+        }
+
+        /* Rotating Earth */
+        .earth {
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle at 30% 30%, #4facfe 0%, #00f2fe 100%);
+            border-radius: 50%;
+            box-shadow: inset -10px -10px 20px rgba(0,0,0,0.2), 0 0 15px rgba(79, 172, 254, 0.5);
+            position: relative;
+            overflow: hidden;
+            margin: 20px 0;
+            animation: rotateEarth 10s linear infinite;
+        }
+
+        .earth::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 100%;
+            background: repeating-linear-gradient(90deg, transparent, transparent 20px, #2ecc71 20px, #2ecc71 40px);
+            opacity: 0.4;
+            filter: blur(5px);
+        }
+
+        @keyframes rotateEarth {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .message {
+            color: var(--text-color);
+            font-size: 1.2rem;
+            margin-top: 20px;
+            padding: 0 20px;
+        }
+
+        .heart {
+            color: var(--accent-red);
+            display: inline-block;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+    </style>
 </head>
-
 <body>
 
-<div id="globe"></div>
-<div class="plane"></div>
+    <div class="stars-container" id="stars"></div>
 
-<img id="kangaroo" src="https://i.imgur.com/ORYNoHC.jpeg" alt="Kangaroo">
+    <div class="perspective-container">
+        <div class="card" id="card" onclick="openCard()">
+            <div class="card-front">
+                <h1>To Summer <span class="heart">❤️</span></h1>
+                <p style="color: #888; font-size: 0.8rem;">(Click to open)</p>
+            </div>
 
-<!-- REAL SVG FLOWER -->
-<div id="flowerContainer">
-<svg viewBox="0 0 200 200" width="120" height="120">
-  <!-- Petals -->
-  <ellipse class="petal" cx="100" cy="50" rx="25" ry="45" fill="#ff4d6d"/>
-  <ellipse class="petal" cx="150" cy="100" rx="25" ry="45" fill="#ff4d6d" transform="rotate(90 150 100)"/>
-  <ellipse class="petal" cx="100" cy="150" rx="25" ry="45" fill="#ff4d6d"/>
-  <ellipse class="petal" cx="50" cy="100" rx="25" ry="45" fill="#ff4d6d" transform="rotate(90 50 100)"/>
-  <ellipse class="petal" cx="135" cy="65" rx="25" ry="45" fill="#ff4d6d" transform="rotate(45 135 65)"/>
-  <ellipse class="petal" cx="135" cy="135" rx="25" ry="45" fill="#ff4d6d" transform="rotate(135 135 135)"/>
-  <ellipse class="petal" cx="65" cy="135" rx="25" ry="45" fill="#ff4d6d" transform="rotate(45 65 135)"/>
-  <ellipse class="petal" cx="65" cy="65" rx="25" ry="45" fill="#ff4d6d" transform="rotate(135 65 65)"/>
+            <div class="card-inside">
+                <div class="flower">
+                    <div class="petal" style="transform: rotate(0deg);"></div>
+                    <div class="petal" style="transform: rotate(72deg);"></div>
+                    <div class="petal" style="transform: rotate(144deg);"></div>
+                    <div class="petal" style="transform: rotate(216deg);"></div>
+                    <div class="petal" style="transform: rotate(288deg);"></div>
+                </div>
 
-  <!-- Perfect Center -->
-  <circle cx="100" cy="100" r="30" fill="gold"/>
-</svg>
-</div>
+                <div class="earth"></div>
 
-<div id="message">Happy Valentine’s Day ❤️</div>
+                <div class="message">
+                    Happy Valentine’s Day <br>
+                    <span style="font-weight: bold;">I love you</span> <span class="heart">❤️</span>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<script>
-const plane = document.querySelector('.plane');
-const kangaroo = document.getElementById('kangaroo');
-const flower = document.getElementById('flowerContainer');
-const message = document.getElementById('message');
+    <script>
+        // Generate Stars
+        const starsContainer = document.getElementById('stars');
+        const starCount = 150;
 
-plane.addEventListener('animationend', () => {
-  plane.style.display = 'none';
-  kangaroo.style.opacity = 1;
-  flower.style.opacity = 1;
+        for (let i = 0; i < starCount; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            const size = Math.random() * 3 + 'px';
+            star.style.width = size;
+            star.style.height = size;
+            star.style.top = Math.random() * 100 + '%';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.setProperty('--duration', Math.random() * 3 + 2 + 's');
+            starsContainer.appendChild(star);
+        }
 
-  setTimeout(() => {
-    message.style.opacity = 1;
-  }, 2000);
-});
-</script>
-
+        function openCard() {
+            document.getElementById('card').classList.add('open');
+        }
+    </script>
 </body>
 </html>
