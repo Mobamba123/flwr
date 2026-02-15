@@ -79,14 +79,23 @@ button {
   position: absolute;
 }
 
-/* 🎉 Confetti */
-.confetti {
+/* 🎉 Confetti and ❤️ Hearts */
+.confetti, .heart {
   position: absolute;
   width: 8px;
   height: 8px;
   animation: fall linear forwards;
+  opacity: 0;
 }
 
+.heart {
+  width: 12px;
+  height: 12px;
+  background: red;
+  clip-path: polygon(50% 0%, 61% 10%, 68% 18%, 75% 28%, 82% 40%, 50% 100%, 18% 40%, 25% 28%, 32% 18%, 39% 10%);
+}
+
+/* Confetti / heart fall animation */
 @keyframes fall {
   from {
     transform: translateY(-50px) rotate(0deg);
@@ -173,10 +182,16 @@ button {
 .p4 { top: 60px; left: 15px; }
 .p5 { top: 20px; left: 0; }
 
-/* Bloom */
+/* Bloom slower and staggered */
 .bloom .petal {
-  animation: bloom 0.6s forwards;
+  animation: bloom 1.2s forwards;
 }
+
+.bloom .p1 { animation-delay: 0s; }
+.bloom .p2 { animation-delay: 0.2s; }
+.bloom .p3 { animation-delay: 0.4s; }
+.bloom .p4 { animation-delay: 0.6s; }
+.bloom .p5 { animation-delay: 0.8s; }
 
 @keyframes bloom {
   to { transform: scale(1); }
@@ -211,10 +226,9 @@ button {
   Happy Valentine’s Day ❤️ I love you
 </div>
 
-<img src="https://i.imgur.com/ORYNoHC.jpeg" class="kangaroo" id="kangaroo">
-
 <img src="images/monkey.png" class="spin" id="monkey">
 <img src="images/rosey.png" class="spin" id="rosey">
+<img src="https://i.imgur.com/ORYNoHC.jpeg" class="kangaroo" id="kangaroo">
 
 <div class="flowers-wrapper" id="flowersWrapper">
 
@@ -248,10 +262,29 @@ button {
     <div class="center"></div>
   </div>
 
+  <!-- New Orange Flower -->
+  <div class="flower" style="left: 70px;">
+    <div class="petal p1" style="background:orange;border-color:#ff8c00;"></div>
+    <div class="petal p2" style="background:orange;border-color:#ff8c00;"></div>
+    <div class="petal p3" style="background:orange;border-color:#ff8c00;"></div>
+    <div class="petal p4" style="background:orange;border-color:#ff8c00;"></div>
+    <div class="petal p5" style="background:orange;border-color:#ff8c00;"></div>
+    <div class="center"></div>
+  </div>
+
+  <!-- New Blue Flower -->
+  <div class="flower" style="left: 210px;">
+    <div class="petal p1" style="background:deepskyblue;border-color:#1e90ff;"></div>
+    <div class="petal p2" style="background:deepskyblue;border-color:#1e90ff;"></div>
+    <div class="petal p3" style="background:deepskyblue;border-color:#1e90ff;"></div>
+    <div class="petal p4" style="background:deepskyblue;border-color:#1e90ff;"></div>
+    <div class="petal p5" style="background:deepskyblue;border-color:#1e90ff;"></div>
+    <div class="center"></div>
+  </div>
+
 </div>
 
 <script>
-
 /* ⭐ Stars */
 const starsContainer = document.getElementById("stars");
 for (let i = 0; i < 150; i++) {
@@ -271,10 +304,8 @@ noBtn.addEventListener("mouseover", () => {
   const cardRect = card.getBoundingClientRect();
   const maxX = cardRect.width - 100;
   const maxY = cardRect.height - 60;
-
   const randomX = Math.random() * maxX;
   const randomY = Math.random() * maxY;
-
   noBtn.style.left = randomX + "px";
   noBtn.style.top = randomY + "px";
 });
@@ -282,6 +313,7 @@ noBtn.addEventListener("mouseover", () => {
 /* 💖 Yes Click */
 function sayYes() {
 
+  /* --- Confetti first --- */
   for (let i = 0; i < 120; i++) {
     let conf = document.createElement("div");
     conf.classList.add("confetti");
@@ -292,15 +324,30 @@ function sayYes() {
     document.body.appendChild(conf);
   }
 
+  /* Hide the card */
   card.style.display = "none";
 
+  /* Show characters and flowers */
   document.getElementById("monkey").style.display = "block";
   document.getElementById("rosey").style.display = "block";
   document.getElementById("kangaroo").style.display = "block";
   document.getElementById("flowersWrapper").style.display = "block";
   document.getElementById("finalMessage").style.display = "block";
 
+  /* Bloom flowers */
   document.querySelectorAll(".flower").forEach(f => f.classList.add("bloom"));
+
+  /* --- After a short delay, hearts fall --- */
+  setTimeout(() => {
+    for (let i = 0; i < 100; i++) {
+      let heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.style.left = Math.random() * window.innerWidth + "px";
+      heart.style.top = "-20px";
+      heart.style.animationDuration = (Math.random()*3+2)+"s";
+      document.body.appendChild(heart);
+    }
+  }, 800); // starts after 0.8s to let confetti start
 }
 
 </script>
