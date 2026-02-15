@@ -13,7 +13,7 @@ body {
   font-family: Arial, sans-serif;
 }
 
-/* ⭐ Stars */
+/* Stars */
 .stars {
   position: absolute;
   width: 100%;
@@ -34,7 +34,7 @@ body {
   to { opacity: 1; }
 }
 
-/* 💌 Card */
+/* Card */
 .card {
   position: absolute;
   width: 420px;
@@ -79,23 +79,14 @@ button {
   position: absolute;
 }
 
-/* 🎉 Confetti and ❤️ Hearts */
-.confetti, .heart {
+/* Confetti */
+.confetti {
   position: absolute;
   width: 8px;
   height: 8px;
   animation: fall linear forwards;
-  opacity: 0;
 }
 
-.heart {
-  width: 12px;
-  height: 12px;
-  background: red;
-  clip-path: polygon(50% 0%, 61% 10%, 68% 18%, 75% 28%, 82% 40%, 50% 100%, 18% 40%, 25% 28%, 32% 18%, 39% 10%);
-}
-
-/* Confetti / heart fall animation */
 @keyframes fall {
   from {
     transform: translateY(-50px) rotate(0deg);
@@ -107,7 +98,7 @@ button {
   }
 }
 
-/* 🐒 🐱 */
+/* monkrose */
 .spin {
   position: absolute;
   width: 120px;
@@ -123,7 +114,7 @@ button {
   to { transform: rotate(360deg); }
 }
 
-/* 🦘 Kangaroo */
+/* Kangaroo */
 .kangaroo {
   position: absolute;
   width: 150px;
@@ -134,7 +125,7 @@ button {
   z-index: 3;
 }
 
-/* 🌸 Flowers */
+/* Flowers */
 .flowers-wrapper {
   position: absolute;
   bottom: 80px;
@@ -197,7 +188,7 @@ button {
   to { transform: scale(1); }
 }
 
-/* 💖 Final Message */
+/*  Final Message */
 .message {
   position: absolute;
   top: 30px;
@@ -262,7 +253,7 @@ button {
     <div class="center"></div>
   </div>
 
-  <!-- New Orange Flower -->
+  <!-- Orange Flower -->
   <div class="flower" style="left: 70px;">
     <div class="petal p1" style="background:orange;border-color:#ff8c00;"></div>
     <div class="petal p2" style="background:orange;border-color:#ff8c00;"></div>
@@ -272,7 +263,7 @@ button {
     <div class="center"></div>
   </div>
 
-  <!-- New Blue Flower -->
+  <!-- Blue Flower -->
   <div class="flower" style="left: 210px;">
     <div class="petal p1" style="background:deepskyblue;border-color:#1e90ff;"></div>
     <div class="petal p2" style="background:deepskyblue;border-color:#1e90ff;"></div>
@@ -285,7 +276,7 @@ button {
 </div>
 
 <script>
-/* ⭐ Stars */
+/* Stars */
 const starsContainer = document.getElementById("stars");
 for (let i = 0; i < 150; i++) {
   let star = document.createElement("div");
@@ -296,7 +287,7 @@ for (let i = 0; i < 150; i++) {
   starsContainer.appendChild(star);
 }
 
-/* 😈 No button stays inside card */
+/* No button stays inside card */
 const noBtn = document.getElementById("noBtn");
 const card = document.getElementById("card");
 
@@ -310,10 +301,10 @@ noBtn.addEventListener("mouseover", () => {
   noBtn.style.top = randomY + "px";
 });
 
-/* 💖 Yes Click */
+/* Yes Click */
 function sayYes() {
 
-  /* --- Confetti first --- */
+  /* --- Confetti --- */
   for (let i = 0; i < 120; i++) {
     let conf = document.createElement("div");
     conf.classList.add("confetti");
@@ -336,18 +327,6 @@ function sayYes() {
 
   /* Bloom flowers */
   document.querySelectorAll(".flower").forEach(f => f.classList.add("bloom"));
-
-  /* --- After a short delay, hearts fall --- */
-  setTimeout(() => {
-    for (let i = 0; i < 100; i++) {
-      let heart = document.createElement("div");
-      heart.classList.add("heart");
-      heart.style.left = Math.random() * window.innerWidth + "px";
-      heart.style.top = "-20px";
-      heart.style.animationDuration = (Math.random()*3+2)+"s";
-      document.body.appendChild(heart);
-    }
-  }, 800); // starts after 0.8s to let confetti start
 }
 
 </script>
